@@ -92,7 +92,7 @@ class SecurityController extends AbstractController
 		        $em->flush();
 		        
 		        $message = (new Email())
-		        ->from('unilever@alfarazvitie.ru')
+		        ->from('example@example.com')
 		        ->subject('Напоминание пароля')
 		        ->to($user->getEmail())
 		        ->html(
