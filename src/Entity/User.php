@@ -24,12 +24,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      */
     
-    /**
-     * @Assert\NotNull
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
-     * )
-     */
     private $email;
 
     /**
@@ -41,8 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      *
-     * @SecurityAssert\UserPassword(
-     *     message = "Wrong value for your current password"
+     * 
      */
     private $password;
 
