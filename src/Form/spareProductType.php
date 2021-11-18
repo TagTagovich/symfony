@@ -42,8 +42,9 @@ class ProductType extends AbstractType
             ->add('height')
             ->add('length')
             ->add('category')
-            ->add('productPhotos', ProductPhotoType::class)
-            ->add('productProperties', ProductPropertyType::class)
+            ->add('productPhotos')
+            ->add('productProperties')
+            ->add('image', VichImageType::class, ['label' => 'Файл изображения', 'required' => false])
         ;
     }
 

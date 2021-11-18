@@ -28,21 +28,21 @@ class ProductPhoto
      * 
      * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
      * 
-     * @var File|null
+     * @var File
      */
     private $imageFile;
 
     /**
      * @ORM\Column(type="string")
      *
-     * @var string|null
+     * @var string
      */
     private $imageName;
 
     /**
      * @ORM\Column(type="integer")
      *
-     * @var int|null
+     * @var int
      */
     private $imageSize;
 

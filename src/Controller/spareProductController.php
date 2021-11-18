@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\ProductPhoto;
-use App\Entity\ProductProperty;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,44 +18,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/{id}", name="product_index", methods={"GET"})
      * @Route("/", name="product_index", methods={"GET"})
      */
-    public function index(ProductRepository $productRepository, ProductPhoto $productPh = null, ProductProperty $productPr = null): Response
+    public function index(ProductRepository $productRepository): Response
     {
-            if($productPh){
-	    	$photos = $productRepository->findByProductPhoto($productPh);
-	    }else{
-	    	$photos = $productRepository->findAll();
-	    }
-            
-            if($productPr){
-	    	$property = $productRepository->findByProductPhoto($productPr);
-	    }else{
-	    	$property = $productRepository->findAll();
-	    }
-            
-         return $this->render('product/index.html.twig', [
+        return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
-            'productPhoto' => $productRepository->findAll(),
-            'productProperty' => $productRepository->findAll()
         ]);
     }
 
     /**
-     * @Route("/new/by_product/{id}", name="product_new", methods={"GET","POST"})
      * @Route("/new", name="product_new", methods={"GET","POST"})
-     *
      */
-    public function new(Request $request, ProductPhoto $productPh = null, ProductProperty $productPr = null): Response
+    public function new(Request $request): Response
     {
         
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
-        if($productPh){
-	        $form->remove('productPhoto');
-        	$product->setOffer($productPhoto);
-        }
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -64,12 +42,12 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
             
-            return $this->redirectToRoute('product_index', ['id' => $banner->getProductPhoto()->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/new.html.twig', [
             'product' => $product,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
@@ -94,12 +72,12 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('product_index', ['id' => $product->getOffer()->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/edit.html.twig', [
             'product' => $product,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
@@ -109,13 +87,11 @@ class ProductController extends AbstractController
     public function delete(Request $request, Product $product): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
-            $productId = $product->getProductPhoto()->getId();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($product);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('product_index', ['id' => $productId]], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
     }
-
 }
