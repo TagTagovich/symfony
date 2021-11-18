@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Form\ProductType;
+use App\Entity\ProductPhoto;
+//use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+//use Vich\UploaderBundle\Handler\DownloadHandler;
 
 /**
  * @Route("/product")
@@ -30,6 +32,7 @@ class ProductController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -38,7 +41,7 @@ class ProductController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -91,4 +94,9 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /*public function downloadImageAction(Image $image, DownloadHandler $downloadHandler): Response
+    {
+        return $downloadHandler->downloadObject($image, $fileField = 'imageFile');
+    } /*
 }

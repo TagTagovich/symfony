@@ -6,6 +6,8 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -113,6 +115,8 @@ class Product
      * @ORM\OneToMany(targetEntity=ProductPhoto::class, mappedBy="product")
      */
     private $productPhotos;
+    
+    protected $productPhoto;
 
     public function __construct()
     {

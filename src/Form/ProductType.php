@@ -3,9 +3,16 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Form\ProductPhotoType;
+use App\Form\ProductProperty;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductType extends AbstractType
 {
@@ -16,7 +23,13 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('price')
             ->add('slug')
-            ->add('type')
+            ->add('type', ChoiceType::class, [
+                    'choices'  => [
+                        'consumable' => 'consumable',
+                        'finished product' => 'finished product',
+                        'collection' => 'collection'
+                    ],
+                 ])
             ->add('activity')
             ->add('base_price')
             ->add('disc_price')
@@ -29,6 +42,8 @@ class ProductType extends AbstractType
             ->add('height')
             ->add('length')
             ->add('category')
+            ->add('productPhoto', ProductPhotoType::class)
+            ->add('property', ProductPropertyType::class)
         ;
     }
 

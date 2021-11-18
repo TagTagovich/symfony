@@ -25,7 +25,7 @@ class ProductProperty
     /**
      * @ORM\ManyToOne(targetEntity=Property::class, inversedBy="productProperties")
      */
-    private $property;
+    protected $property;
 
     /**
      * @ORM\Column(type="string", length=1000)
