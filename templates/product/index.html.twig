@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+    <div>Товары</div>
+    
+    <a class="btn btn-primary rounded-pill d-block" href="{{ path('product_new') }}"><i class="fa fa-plus"></i> Создать товар</a>
+</h4>
+<div class="card">
+    <div class="card-datatable table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Slug</th>
+                <th>Type</th>
+                <th>Статус</th>
+                <th>Base_price</th>
+                <th>Disc_price</th>
+                <th>Access_oddment</th>
+                <th>Components_comport</th>
+                <th>Consumable_ware</th>
+                <th>Created_at</th>
+                <th>Weight</th>
+                <th>Width</th>
+                <th>Height</th>
+                <th>Length</th>
+                <th>actions</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.slug }}</td>
+                <td>{{ product.type }}</td>
+                <td>{% if product.isActive %}<span class="badge badge-success">Активен</span>{% else %}<span class="badge badge-dark">Не Активен</span>{% endif %}</td>
+                    
+                <td>{{ product.basePrice }}</td>
+                <td>{{ product.discPrice }}</td>
+                <td>{{ product.accessOddment }}</td>
+                <td>{{ product.componentsComport }}</td>
+                <td>{{ product.consumableWare }}</td>
+                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ product.weight }}</td>
+                <td>{{ product.width }}</td>
+                <td>{{ product.height }}</td>
+                <td>{{ product.length }}</td>
+                <td>
+                    <nobr>
+                         <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-info" title="Просмотр"><i class="fas fa-eye"></i></a>
+                         <a href="{{ path('product_index', {'id': product.id}) }}" class="btn btn-warning" title="Фото"><i class="fas fa-image"></i></a>      
+                         {% if is_granted('ROLE_MANAGER') %}
+                         <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-success" title="Редактировать"><i class="fas fa-pencil-alt"></i ></a>
+                         <a href="{{ path('product_delete', {'id': product.id}) }}" class="btn btn-danger" title="Удалить"><i class="far fa-trash-alt"></i></a>
+                         {% endif %}
+                    </nobr>
+                </td>     
+            </tr>
+         {% else %}
+                <tr>
+                    <td colspan="4">пусто</td>
+                </tr>
+         {% endfor %}
+         </tbody>
+       </table>
+    </div>
+</div>
+{% endblock %}
+
+ {% block stylesheets %}
+     {{ parent() }}
+ {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+ {% endblock %}
