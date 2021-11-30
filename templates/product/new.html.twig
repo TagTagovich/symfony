@@ -1,40 +1,44 @@
 {% extends 'base.html.twig' %}
 
- {% block body %}
-    <h1>Create new Product</h1>
+{% block title %}Создание товара{% endblock %}
 
-    {{ include('product/_form.html.twig') }}
+{% block body %}
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+        <div><a href="{{ path('product_index') }}">Товары</a> / Создание товара</div>
+    </h4>    
+         <div class="card">
+            <div class="card-body">
+                {{ include('product/_form.html.twig') }}
+            </div>
+        </div>    
+{{ form_start(form) }} 
 
-    <a href="{{ path('product_index') }}">back to list</a>
+{#<h3 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+    <div>Новое фото</div>
+</h3>#}
 
-
-
-
-{% endblock %}
-
-{% block image %}
-{{ form_start(form) }}
-    {{ form_row(form.description) }}
-<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
-
-    <h3>New Image</h3>
-    <ul class="images" data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
+{#<ul class="images" data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
     data-prototype="{{ form_widget(form.images.vars.prototype.image)|e('html_attr') }}">
         
-        {% for image in form.images %}
-            <li>{{ form_row(image.image) }}</li>
-        {% endfor %}
-    </ul>
-    
+    {% for image in form.images %}
+        <li>{{ form_row(image.image) }}</li>
+    {% endfor %}
+</ul>#}
+{#<button type="button" class="add_item_link" data-collection-holder-class="images">Add a photo</button>#}
+
 {{ form_end(form) }}
 
-
 {% endblock %}
+
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('con') }}
+{% endblock %}
+
+
 
 
   
 
-    {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('con') }}
-    {% endblock %}
+ 

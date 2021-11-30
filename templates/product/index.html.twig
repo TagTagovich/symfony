@@ -14,22 +14,23 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Цена</th>
                 <th>Slug</th>
-                <th>Type</th>
+                <th>Тип</th>
                 <th>Статус</th>
-                <th>Base_price</th>
-                <th>Disc_price</th>
-                <th>Access_oddment</th>
-                <th>Components_comport</th>
-                <th>Consumable_ware</th>
-                <th>Created_at</th>
-                <th>Weight</th>
-                <th>Width</th>
-                <th>Height</th>
-                <th>Length</th>
+                <th>Базовая цена</th>
+                <th>Цена со скидкой</th>
+                <th>Доступный остаток</th>
+                <th>Комплектующие</th>
+                <th>Расходники</th>
+                <th>Дата создания</th>
+                <th>Вес</th>
+                <th>Ширина</th>
+                <th>Высота</th>
+                <th>Длина</th>
+                {#<th>Свойства</th>#}
                 <th>actions</th>
                 <th></th>
             </tr>
@@ -55,14 +56,14 @@
                 <td>{{ product.width }}</td>
                 <td>{{ product.height }}</td>
                 <td>{{ product.length }}</td>
+                {#<td>{{ property.value }}</td>#}
                 <td>
                     <nobr>
-                         <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-info" title="Просмотр"><i class="fas fa-eye"></i></a>
                          <a href="{{ path('product_index', {'id': product.id}) }}" class="btn btn-warning" title="Фото"><i class="fas fa-image"></i></a>      
-                         {% if is_granted('ROLE_MANAGER') %}
+                         {#{% if is_granted('ROLE_MANAGER') %}#}
                          <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-success" title="Редактировать"><i class="fas fa-pencil-alt"></i ></a>
                          <a href="{{ path('product_delete', {'id': product.id}) }}" class="btn btn-danger" title="Удалить"><i class="far fa-trash-alt"></i></a>
-                         {% endif %}
+                        {# {% endif %} #}
                     </nobr>
                 </td>     
             </tr>
@@ -77,10 +78,10 @@
 </div>
 {% endblock %}
 
- {% block stylesheets %}
+ {#{% block stylesheets %}
      {{ parent() }}
  {% endblock %}
 
  {% block javascripts %}
      {{ parent() }}
- {% endblock %}
+ {% endblock %}#}

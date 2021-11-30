@@ -6,16 +6,17 @@ use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('slug')
-            ->add('products')
+            ->add('name', TextType::class, ['label' => 'Название'])
+            ->add('description', TextType::class, ['label' => 'Описание'])
+            ->add('slug', TextType::class, ['label' => 'Slug'])
+            //->add('products')
         ;
     }
 

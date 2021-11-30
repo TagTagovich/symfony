@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Property{% endblock %}
+{% block title %}Создание свойства{% endblock %}
 
 {% block body %}
-    <h1>Create new Property</h1>
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+        <div><a href="{{ path('property_index') }}">Свойство</a> / Создание свойства</div>
+    </h4>
 
-    {{ include('property/_form.html.twig') }}
-
-    <a href="{{ path('property_index') }}">back to list</a>
+    <div class="card">
+        <div class="card-body">
+            {{ include('property/_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

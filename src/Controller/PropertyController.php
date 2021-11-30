@@ -49,16 +49,6 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="property_show", methods={"GET"})
-     */
-    public function show(Property $property): Response
-    {
-        return $this->render('property/show.html.twig', [
-            'property' => $property,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="property_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Property $property): Response

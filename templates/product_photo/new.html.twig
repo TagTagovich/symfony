@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ProductPhoto{% endblock %}
+{% block title %}Создать фото{% endblock %}
 
 {% block body %}
-    <h1>Create new ProductPhoto</h1>
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+        <div><a href="{{ path('product_photo_index') }}">Фото</a> / Создание фото</div>
+    </h4>
 
-    {{ include('product_photo/_form.html.twig') }}
-
-    <a href="{{ path('product_photo_index') }}">back to list</a>
+    <div class="card">
+        <div class="card-body">
+            {{ include('product_photo/_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

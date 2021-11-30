@@ -1,86 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product{% endblock %}
+{% block title %}Товары{% endblock %}
 
 {% block body %}
-    <h1>Product</h1>
+<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+    <div><a href="{{ path('product_index') }}">Товары</a> / Описание</div>
+</h4>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ product.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ product.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ product.slug }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ product.type }}</td>
-            </tr>
-            <tr>
-                <th>Activity</th>
-                <td>{{ product.activity ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Base_price</th>
-                <td>{{ product.basePrice }}</td>
-            </tr>
-            <tr>
-                <th>Disc_price</th>
-                <td>{{ product.discPrice }}</td>
-            </tr>
-            <tr>
-                <th>Access_oddment</th>
-                <td>{{ product.accessOddment }}</td>
-            </tr>
-            <tr>
-                <th>Components_comport</th>
-                <td>{{ product.componentsComport }}</td>
-            </tr>
-            <tr>
-                <th>Consumable_ware</th>
-                <td>{{ product.consumableWare }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Weight</th>
-                <td>{{ product.weight }}</td>
-            </tr>
-            <tr>
-                <th>Width</th>
-                <td>{{ product.width }}</td>
-            </tr>
-            <tr>
-                <th>Height</th>
-                <td>{{ product.height }}</td>
-            </tr>
-            <tr>
-                <th>Length</th>
-                <td>{{ product.length }}</td>
-            </tr>
-        </tbody>
-    </table>
+{#<ul class="nav nav-tabs mb-2">
+    <li class="nav-item"> <a class="nav-link active" href="{{ path('product_show', { id : product.id }) }}" role="tab"><span class="hidden-xs-down">Описание</span></a> </li>#}
+    {#<li class="nav-item"> <a class="nav-link" href="{{ path('traffic_type_list_for_offer', {'id': offer.id}) }}" role="tab"><span class="hidden-xs-down">Правила</span></a> </li>#}
+    {#<li class="nav-item"> <a class="nav-link" href="{{ path('product_photo_index', {'id': product.id}) }}" role="tab"><span class="hidden-xs-down">Фотографии</span></a> </li>
+</ul>#}
 
-    <a href="{{ path('product_index') }}">back to list</a>
-
-    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-
-    {{ include('product/_delete_form.html.twig') }}
+<div class="card">
+    <div class="card-body">
+        <p>{{ product.description }}</p>
+        <ul>
+            <li><strong>Цена</strong> : {{ product.price }}</li>
+            <li><strong>Slug(ЧПУ)</strong> : {{ product.slug }}</li>
+            <li><strong>Тип товара</strong> : {% set typeCode = product.type %}{% include '_product_type_field.html.twig' %}</li>
+            <li><strong>Цена</strong> : {{ product.price }}</li>
+            <li>{% if product.isActive %}<span class="badge badge-outline-success">Активен</span>{% else %}<span class="badge badge-outline-danger">Деактивирован</span>{% endif %}</li>
+           <li><strong>Базовая цена</strong> : {{ product.basePrice }}</li> 
+           <li><strong>Цена со скидкой</strong> : {{ product.discPrice }}</li> 
+           <li><strong>Доступный остаток</strong> : {{ product.accessOddment }}</li> 
+           <li><strong>Комплектующие (для набора)</strong> : {{ product.componentsComport }}</li> 
+           <li><strong>Расходники (для готового изделия)</strong> : {{ product.consumableWare }}</li> 
+           <li><strong>Дата создания</strong> : {{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : ''  }}</li> 
+           <li><strong>Вес</strong> : {{ product.weight }}</li>
+           <li><strong>Ширина</strong> : {{ product.width }}</li>
+           <li><strong>Высота</strong> : {{ product.height }}</li>
+           <li><strong>Длина</strong> : {{ product.length }}</li>
+           {#<li><strong>Категория</strong> : {{ product.category }}</li>#}
+        </ul>
+    </div>
+</div>
 {% endblock %}

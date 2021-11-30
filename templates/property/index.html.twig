@@ -1,39 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Property index{% endblock %}
+{% block title %}Свойства{% endblock %}
 
 {% block body %}
-    <h1>Property index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Product_key</th>
-                <th>Type</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for property in properties %}
-            <tr>
-                <td>{{ property.id }}</td>
-                <td>{{ property.name }}</td>
-                <td>{{ property.productKey }}</td>
-                <td>{{ property.type }}</td>
-                <td>
-                    <a href="{{ path('property_show', {'id': property.id}) }}">show</a>
-                    <a href="{{ path('property_edit', {'id': property.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('property_new') }}">Create new</a>
+<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+    <div>Свойства</div>
+    
+    <a class="btn btn-primary rounded-pill d-block" href="{{ path('property_new') }}"><i class="fa fa-plus"></i> Создать свойство</a>
+</h4>
+<div class="card">
+    <div class="card-datatable table-responsive">
+        <table class="table color-table muted-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Название</th>
+                    <th>Код</th>
+                    <th>Тип</th>
+                    <th>actions</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for property in properties %}
+                <tr>
+                    <td>{{ property.id }}</td>
+                    <td>{{ property.name }}</td>
+                    <td>{{ property.propertyKey }}</td>
+                    <td>{{ property.type }}</td>
+                    <td>
+                        <nobr>
+                            <a href="{{ path('property_edit', {'id': property.id}) }}" class="btn btn-success" title="Редактировать"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ path('property_delete', {'id': property.id}) }}" class="btn btn-danger" title="Удалить"><i class="far fa-trash-alt"></i></a>
+                        </nobr>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
+

@@ -1,39 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
-
+{% block title %}Пользователи{% endblock %}
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('user_new') }}">Create new</a>
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+        <div>Пользователи</div>
+        
+    	<a class="btn btn-primary rounded-pill d-block" href="{{ path('user_new') }}"><i class="fa fa-plus"></i> Создать пользователя</a>
+    </h4>
+	<form class="justify-content-between">
+		<div class="form-group">
+			<div class="input-group">
+				<input type="text" id="search" name="q" class="form-control" value="{{ app.request.query.get('q') }}" placeholder="Поиск" style="max-width: 200px">
+				<span class="input-group-append">
+	                <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i> Найти</button>
+	                {% if app.request.query.get('q') %}
+	                <a class="btn btn-warning" href="{{ path('user_index') }}">Очистить</a>
+	                {% endif %}
+	            </span>
+			</div>
+		</div>
+	</form>
+	<div class="card">
+		<div class="card-datatable table-responsive">
+		    <table class="table table-hover">
+		        <thead>
+		            <tr>
+		                <th>#</th>
+		                <th>Email</th>
+		                <th>ФИО</th>
+		                <th>Активность</th>
+		                <th>Роли</th>
+		                <th></th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for user in users %}
+		            <tr>
+		                <td>{{ user.id }}</td>
+		                <td>{{ user.email }}</td>
+		                <td>{{ user.fio }}</td>
+		                <td>{% if user.isActive %}<span class="badge badge-outline-success">Активен</span>{% else %}<span class="badge badge-outline-danger">Деактивирован</span>{% endif %}</td>
+		                <td>
+		                    {% include 'user/_groups.html.twig' %}
+				        </td>
+		                <td align="right">
+		                    <a class="btn btn-info" href="{{ path('user_show', {'id': user.id}) }}" title="Посмотреть"><i class="fa fa-eye"></i></a>
+		                    <a class="btn btn-success" href="{{ path('user_edit', {'id': user.id}) }}" title="Изменить"><i class="fa fa-pencil-alt"></i></a>
+		                    <a class="btn btn-danger" href="{{ path('user_delete', {'id': user.id}) }}" title="Удалить"><i class="fa fa-times"></i></a>
+		                </td>
+		            </tr>
+		        {% else %}
+		            <tr>
+		                <td colspan="6">пусто</td>
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+		    </table>
+		</div>
+	</div>
 {% endblock %}

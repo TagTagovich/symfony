@@ -35,7 +35,7 @@ class ProductController extends AbstractController
      */
     public function new(Request $request, ProductPhoto $productPh = null): Response
     {
-        $filesystem = new Filesystem();
+        //$filesystem = new Filesystem();
         //$newtag = $filesystem->appendToFile('logs.png', '');
         
         $product = new Product();
@@ -44,18 +44,18 @@ class ProductController extends AbstractController
         	$product->setProductPhoto($productPh);
         }*/
         
-        $image = new ProductPhoto();
+        /*$image = new ProductPhoto();
         $image->setImage();
-        $product->getImages()->add($image);
+        $product->getImages()->add($image);*/
 
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
-            $entityManager = $this->getDoctrine()->getManager();
+            /*$entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
-            $entityManager->flush();
+            $entityManager->flush();*/
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);

@@ -1,39 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}Категории{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Slug</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>{{ category.description }}</td>
-                <td>{{ category.slug }}</td>
-                <td>
-                    <a href="{{ path('category_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('category_new') }}">Create new</a>
+<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+    <div>Категории</div>
+    
+    <a class="btn btn-primary rounded-pill d-block" href="{{ path('category_new') }}"><i class="fa fa-plus"></i> Создать категорию</a>
+</h4>
+<div class="card">
+    <div class="card-datatable table-responsive">
+        <table class="table color-table muted-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Slug</th>
+                    {#<th>Товар</th>#}
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description }}</td>
+                    <td>{{ category.slug }}</td>
+                    {#<td>{{ category.products }}</td>#}
+                    <td>
+                        <nobr>
+                            <a href="{{ path('category_show', {'id': category.id}) }}" class="btn btn-info" title="Просмотр"><i class="fas fa-eye"></i></a>
+                            {#<a href="{{ path('banner_index', {'id': offer.id}) }}" class="btn btn-warning" title="Баннеры"><i class="fas fa-image"></i></a>#}
+                            {#{% if is_granted('ROLE_MANAGER') %}#}
+                            <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-success" title="Редактировать"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ path('category_delete', {'id': category.id}) }}" class="btn btn-danger" title="Удалить"><i class="far fa-trash-alt"></i></a>
+                            {#{% endif %}#}
+                        </nobr>
+                    </td>
+                </tr>
+            {#{% else %}
+                <tr>
+                    <td colspan="4">пусто</td>
+                </tr>#}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
+

@@ -1,34 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Пользователь #{{ user.id }}{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+        <div><a href="{{ path('user_index') }}">Пользователи</a> / Пользователь #{{ user.id }}</div>
+    </h4>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<div class="card">
+		<div class="card-body">
+		    <table class="table">
+		        <tbody>
+		            <tr>
+		                <th>Id</th>
+		                <td>{{ user.id }}</td>
+		            </tr>
+		            <tr>
+		                <th>Email</th>
+		                <td>{{ user.email }}</td>
+		            </tr>
+		            <tr>
+		                <th>ФИО</th>
+		                <td>{{ user.fio }}</td>
+		            </tr>
+		            <tr>
+		                <th>Активен</th>
+		                <td>{% if user.isActive %}<span class="badge badge-outline-success">Активен</span>{% else %}<span class="badge badge-outline-danger">Деактивирован</span>{% endif %}</td>
+		            </tr>
+		            <tr>
+		                <th>Роли</th>
+		                <td>
+		                    {% include 'user/_groups.html.twig' %}
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>Создан</th>
+		                <td>{{ user.createdAt ? user.createdAt|date('d.m.Y H:i:s') : '' }}</td>
+		            </tr>
+		            <tr>
+		                <th>Изменен</th>
+		                <td>{{ user.updatedAt ? user.updatedAt|date('d.m.Y H:i:s') : '' }}</td>
+		            </tr>
+		        </tbody>
+		    </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+			<a class="btn btn-success" href="{{ path('user_edit', {'id': user.id}) }}">Изменить</a>
+			<a class="btn btn-danger" href="{{ path('user_edit', {'id': user.id}) }}"><i class="fa fa-times"></i> Удалить</a>
+			<a class="btn btn-default" href="{{ path('user_index') }}">Отмена</a>
+		</div>
+	</div>
 {% endblock %}

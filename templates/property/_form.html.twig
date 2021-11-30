@@ -1,4 +1,5 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn">{{ button_label|default('Сохранить') }}</button>
+    <a class="btn btn-default" href="{{ path('property_index') }}">Отмена</a>
 {{ form_end(form) }}

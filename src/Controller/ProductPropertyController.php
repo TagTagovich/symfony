@@ -49,16 +49,6 @@ class ProductPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_property_show", methods={"GET"})
-     */
-    public function show(ProductProperty $productProperty): Response
-    {
-        return $this->render('product_property/show.html.twig', [
-            'product_property' => $productProperty,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="product_property_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ProductProperty $productProperty): Response

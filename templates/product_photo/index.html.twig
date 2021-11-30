@@ -1,41 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ProductPhoto index{% endblock %}
+{% block title %}Офферы{% endblock %}
 
 {% block body %}
-    <h1>ProductPhoto index</h1>
-
-    <table class="table">
+<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+    <div>Офферы</div>
+    
+    <a class="btn btn-primary rounded-pill d-block" href="{{ path('offer_new') }}"><i class="fa fa-plus"></i> Создать оффер</a>
+</h4>
+<div class="card">
+    <div class="card-datatable table-responsive">
+        <table class="table color-table muted-table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>ImageName</th>
-                <th>ImageSize</th>
-                <th>UpdatedAt</th>
-                <th>TestField</th>
+                <th>Название</th>
+                <th>Размер</th>
+                <th>Дата обновления</th>
                 <th>actions</th>
             </tr>
         </thead>
-        <tbody>
-        {% for product_photo in product_photos %}
-            <tr>
-                <td>{{ product_photo.id }}</td>
-                <td>{{ product_photo.imageName }}</td>
-                <td>{{ product_photo.imageSize }}</td>
-                <td>{{ product_photo.updatedAt ? product_photo.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ product_photo.testField }}</td>
-                <td>
-                    <a href="{{ path('product_photo_show', {'id': product_photo.id}) }}">show</a>
-                    <a href="{{ path('product_photo_edit', {'id': product_photo.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('product_photo_new') }}">Create new</a>
+            <tbody>
+            {% for product_photo in product_photos %}
+                <tr>
+                    <td>{{ product_photo.id }}</td>
+                    <td>{{ product_photo.imageName }}</td>
+                    <td>{{ product_photo.imageSize }}</td>
+                    <td>{{ product_photo.updatedAt ? product_photo.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        
+                        <nobr>
+                            <a href="{{ path('product_photo_edit', {'id': product_photo.id}) }}" class="btn btn-success" title="Редактировать"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ path('product_photo_delete', {'id': product_photo.id}) }}" class="btn btn-danger" title="Удалить"><i class="far fa-trash-alt"></i></a>
+                        </nobr>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
+

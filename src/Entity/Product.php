@@ -54,32 +54,32 @@ class Product
     /**
      * @ORM\Column(type="integer")
      */
-    private $base_price;
+    private $basePrice;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $disc_price;
+    private $discPrice;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $access_oddment;
+    private $accessOddment;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
      */
-    private $components_comport;
+    private $componentsComport;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $consumable_ware;
+    private $consumableWare;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -115,17 +115,12 @@ class Product
      * @ORM\OneToMany(targetEntity=ProductPhoto::class, mappedBy="product")
      */
     private $productPhotos;
-    
-    protected $productPhoto;
-    
-    protected $images;
 
     public function __construct()
     {
         $this->category = new ArrayCollection();
         $this->productProperties = new ArrayCollection();
         $this->productPhotos = new ArrayCollection();
-        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -207,72 +202,72 @@ class Product
 
     public function getBasePrice(): ?int
     {
-        return $this->base_price;
+        return $this->basePrice;
     }
 
-    public function setBasePrice(int $base_price): self
+    public function setBasePrice(int $basePrice): self
     {
-        $this->base_price = $base_price;
+        $this->basePrice = $basePrice;
 
         return $this;
     }
 
     public function getDiscPrice(): ?int
     {
-        return $this->disc_price;
+        return $this->discPrice;
     }
 
-    public function setDiscPrice(?int $disc_price): self
+    public function setDiscPrice(?int $discPrice): self
     {
-        $this->disc_price = $disc_price;
+        $this->discPrice = $discPrice;
 
         return $this;
     }
 
     public function getAccessOddment(): ?int
     {
-        return $this->access_oddment;
+        return $this->accessOddment;
     }
 
-    public function setAccessOddment(int $access_oddment): self
+    public function setAccessOddment(int $accessOddment): self
     {
-        $this->access_oddment = $access_oddment;
+        $this->accessOddment = $accessOddment;
 
         return $this;
     }
 
     public function getComponentsComport(): ?string
     {
-        return $this->components_comport;
+        return $this->componentsComport;
     }
 
-    public function setComponentsComport(?string $components_comport): self
+    public function setComponentsComport(?string $componentsComport): self
     {
-        $this->components_comport = $components_comport;
+        $this->componentsComport = $componentsComport;
 
         return $this;
     }
 
     public function getConsumableWare(): ?string
     {
-        return $this->consumable_ware;
+        return $this->consumableWare;
     }
 
-    public function setConsumableWare(?string $consumable_ware): self
+    public function setConsumableWare(?string $consumableWare): self
     {
-        $this->consumable_ware = $consumable_ware;
+        $this->consumableWare = $consumableWare;
 
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -387,7 +382,7 @@ class Product
         return $this->productPhotos;
     }
 
-    public function addProductPhoto(ProductPhoto $productPhoto): self
+    public function addProductPhotos(ProductPhoto $productPhoto): self
     {
         if (!$this->productPhotos->contains($productPhoto)) {
             $this->productPhotos[] = $productPhoto;
@@ -397,42 +392,20 @@ class Product
         return $this;
     }
 
-    public function removeProductPhoto(ProductPhoto $productPhoto): self
+    public function removeProductPhotos(ProductPhoto $productPhotos): self
     {
-        if ($this->productPhotos->removeElement($productPhoto)) {
+        if ($this->productPhotos->removeElement($productPhotos)) {
             // set the owning side to null (unless already changed)
-            if ($productPhoto->getProduct() === $this) {
-                $productPhoto->setProduct(null);
+            if ($productPhotos->getProduct() === $this) {
+                $productPhotos>setProduct(null);
             }
         }
 
         return $this;
     }
-    
-    public function getProductPhoto(): ?ProductPhoto
-    {
-        return $this->productPhoto;
-    }
 
-    public function setProductPhoto(?ProductPhoto $productPhoto)
+    public function __toString()
     {
-        $this->productPhoto = $productPhoto;
+        return $this->name;
     }
-    
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-        public function addImage(ProductPhoto $image): void
-    {
-        $this->images->add($image);
-    }
-
-    public function removeImage(ProductPhoto $image): void
-    {
-        // ...
-    }
-
-
 }

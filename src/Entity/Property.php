@@ -27,7 +27,7 @@ class Property
     /**
      * @ORM\Column(type="guid")
      */
-    private $product_key;
+    private $propertyKey;
 
     /**
      * @ORM\Column(type="string", length=10000)
@@ -61,14 +61,14 @@ class Property
         return $this;
     }
 
-    public function getProductKey(): ?string
+    public function getPropertyKey(): ?string
     {
-        return $this->product_key;
+        return $this->propertyKey;
     }
 
-    public function setProductKey(string $product_key): self
+    public function setPropertyKey(string $propertyKey): self
     {
-        $this->product_key = $product_key;
+        $this->propertyKey = $propertyKey;
 
         return $this;
     }

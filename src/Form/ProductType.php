@@ -5,13 +5,14 @@ namespace App\Form;
 use App\Entity\Product;
 use App\Entity\ProductPhoto;
 use App\Form\ProductPhotoType;
-use App\Form\ProductProperty;
+use App\Form\ProductPropertyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductType extends AbstractType
@@ -19,12 +20,12 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         
-        $builder->add('images', CollectionType::class, [
+        /*$builder->add('images', CollectionType::class, [
             'entry_type' => ProductPhotoType::class,
             'entry_options' => ['label' => false],
             'allow_add' => true,
             'by_reference' => false,
-        ]);
+        ]);*/
 
         $builder
             ->add('name')
@@ -33,25 +34,30 @@ class ProductType extends AbstractType
             ->add('slug')
             ->add('type', ChoiceType::class, [
                     'choices'  => [
-                        'consumable' => 'consumable',
-                        'finished product' => 'finished product',
-                        'collection' => 'collection'
+                        'Комплектующее' => 'комплектующее',
+                        'Готовое изделие' => 'готовое изделие',
+                        'Набор' => 'набор'
                     ],
                  ])
-            ->add('isActive')
-            ->add('base_price')
-            ->add('disc_price')
-            ->add('access_oddment')
-            ->add('components_comport')
-            ->add('consumable_ware')
-            ->add('created_at')
+            ->add('isActive', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Активен'
+            ])
+            //->add('basePrice')
+            //->add('discPrice')
+            //->add('accessOddment')
+            //->add('componentsComport')
+            //->add('consumableWare')
+            //->add('createdAt')
             ->add('weight')
             ->add('width')
             ->add('height')
             ->add('length')
-            ->add('category')
+            //->add('category')
+            //, EntityType::class, ['class' => Category::class ])
+                                     
             //->add('productPhoto', ProductPhotoType::class)
-            //->add('property', ProductPropertyType::class)
+            //->add('productProperties', ProductPropertyType::class)
         ;
         
 

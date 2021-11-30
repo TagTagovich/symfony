@@ -50,16 +50,6 @@ class ProductPhotoController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_photo_show", methods={"GET"})
-     */
-    public function show(ProductPhoto $productPhoto): Response
-    {
-        return $this->render('product_photo/show.html.twig', [
-            'product_photo' => $productPhoto,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="product_photo_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, ProductPhoto $productPhoto, EntityManagerInterface $entityManager): Response

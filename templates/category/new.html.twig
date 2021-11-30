@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Category{% endblock %}
+{% block title %}Новая категория{% endblock %}
 
 {% block body %}
-    <h1>Create new Category</h1>
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+        <div><a href="{{ path('category_index') }}">Категория</a> / Создание категории</div>
+    </h4>    
+         <div class="card">
+            <div class="card-body">
+                {{ include('category/_form.html.twig') }}
+            </div>
+        </div>    
 
-    {{ include('category/_form.html.twig') }}
-
-    <a href="{{ path('category_index') }}">back to list</a>
 {% endblock %}
+
