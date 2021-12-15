@@ -20,7 +20,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ImportFileService
 {
 	
-	private $em;
+    private $em;
     private $defaultPath;
     private $targetDirectory;
     private $slugger;
@@ -29,8 +29,8 @@ class ImportFileService
 
 	public function __construct(EntityManagerInterface $em, string $excelDirectory, $targetDirectory, SluggerInterface $slugger, Filesystem $filesystem) 
 	{
-		$this->em = $em;
-		$this->excelDirectory = $excelDirectory;
+        $this->em = $em;
+        $this->excelDirectory = $excelDirectory;
         $this->targetDirectory = $targetDirectory;
         $this->slugger = $slugger;
         $this->filesystem = $filesystem;
@@ -62,11 +62,11 @@ class ImportFileService
 
             'setName',
             'setDescription',
-		    'setPrice',
-		    'setSlug',
-		    'setType',
-		    //'setIsActive',
-		    'setBasePrice',
+            'setPrice',
+            'setSlug',
+            'setType',
+            //'setIsActive',
+            'setBasePrice',
             'setAccessOddment',
 
 		     
@@ -101,8 +101,7 @@ class ImportFileService
                     
                 }
             }
-        //$this->filesystem->remove(['file', $this->excelDirectory, 'price.xlsx']);
-    }
+      }
                         
 
     public function updateExcelFile()
@@ -157,6 +156,6 @@ class ImportFileService
                     //}
                 }                  
             }
-        //$filesystem->remove(['file', '/path/to/directory', 'activity.log']);                          
+                                  
     }           
 }              
