@@ -106,6 +106,8 @@ class Product
      */
     private $category;
 
+    private $productProperty; 
+
     /**
      * @ORM\OneToMany(targetEntity=ProductProperty::class, mappedBy="product")
      */
@@ -352,7 +354,7 @@ class Product
         return $this->productProperties;
     }
 
-    public function addProductProperty(ProductProperty $productProperty): self
+    public function addProductProperties(ProductProperty $productProperty): self
     {
         if (!$this->productProperties->contains($productProperty)) {
             $this->productProperties[] = $productProperty;
@@ -362,12 +364,12 @@ class Product
         return $this;
     }
 
-    public function removeProductProperty(ProductProperty $productProperty): self
+    public function removeProductProperties(ProductProperty $productProperty): self
     {
-        if ($this->productProperties->removeElement($productProperty)) {
+        if ($this->productProperties->removeElement($productProperties)) {
             // set the owning side to null (unless already changed)
-            if ($productProperty->getProduct() === $this) {
-                $productProperty->setProduct(null);
+            if ($productProperties->getProduct() === $this) {
+                $productProperties->setProduct(null);
             }
         }
 

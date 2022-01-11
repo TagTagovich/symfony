@@ -22,7 +22,7 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $title;
 
     /**
      * @ORM\Column(type="string", length=3000)
@@ -30,7 +30,7 @@ class Category
     private $description;
 
     /**
-     * @ORM\Column(type="ascii_string")
+     * @ORM\Column(type="string", length=1000)
      */
     private $slug;
 
@@ -49,14 +49,14 @@ class Category
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(string $name): self
+    public function setTitle(string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
@@ -111,8 +111,9 @@ class Category
 
         return $this;
     }
-    /*public function __toString()
+    
+    public function __toString()
     {
         return $this->products;
-    }*/
+    } 
 }

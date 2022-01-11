@@ -6,7 +6,6 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
                      <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome.css') }}">
                      <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/ionicons.css') }}">
                      <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/linearicons.css') }}">
@@ -29,7 +28,6 @@
         {% endblock %}
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
                         <!-- Load polyfills -->
             <script src="{{ asset('assets/vendor/js/polyfills.js') }}"></script>
             <script>document['documentMode']===10&&document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.~locale.en"><\/script>')</script>
@@ -100,20 +98,5 @@
         <script src="{{ asset('assets/js/demo.js?ggtdd') }}"></script>
         <script src="{{ asset('assets/js/ui_carousel.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/chartjs/chartjs.js') }}"></script>
-        <script>
-        var phoneMask = ['8', /[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
-
-        // Assuming you have an input element in your HTML with the class .myInput
-        var phoneInput = document.querySelector('[data-type="phone"]');
-        
-        if(phoneInput){
-            vanillaTextMask.maskInput({
-                inputElement: phoneInput,
-                mask: phoneMask
-            });
-        }
-        </script>
-        {% block bodyscript %}
-        {% endblock %}
     </body>
 </html>

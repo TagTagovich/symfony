@@ -46,7 +46,15 @@ security:
         - { path: ^/email_template, roles: ROLE_ADMIN }
         - { path: ^/dashboard, roles: [ROLE_ADMIN, ROLE_OPERATOR] }
         - { path: ^/help, roles: [ROLE_USER, ROLE_OPERATOR, ROLE_ADMIN, ROLE_MANAGER] }
-#        - { path: ^/post, roles: [ROLE_USER, ROLE_ADMIN] }
+#        - { path: ^/category/new, roles: [ROLE_ADMIN] }
+#        - { path: ^/category/edit, roles: [ROLE_ADMIN] }
+#        - { path: ^/category/delete, roles: [ROLE_ADMIN] }
+#        - { path: ^/product/new, roles: [ROLE_ADMIN] }
+#        - { path: ^/product/edit, roles: [ROLE_ADMIN] }
+#        - { path: ^/product/delete, roles: [ROLE_ADMIN] }
+#        - { path: ^/property/new, roles: [ROLE_ADMIN] }
+#        - { path: ^/property/edit, roles: [ROLE_ADMIN] }
+#        - { path: ^/property/delete, roles: [ROLE_ADMIN] } 
         
     encoders:
         App\Entity\User:

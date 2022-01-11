@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Офферы{% endblock %}
+{% block title %}Фото товаров{% endblock %}
 
 {% block body %}
 <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
-    <div>Офферы</div>
+    <div>Фото товаров</div>
     
-    <a class="btn btn-primary rounded-pill d-block" href="{{ path('offer_new') }}"><i class="fa fa-plus"></i> Создать оффер</a>
+    <a class="btn btn-primary rounded-pill d-block" href="{{ path('product_photo_new') }}"><i class="fa fa-plus"></i> Создать оффер</a>
 </h4>
 <div class="card">
     <div class="card-datatable table-responsive">
@@ -17,7 +17,7 @@
                 <th>Наименование</th>
                 <th>Размер</th>
                 <th>Дата обновления</th>
-                <th>actions</th>
+                <th>Действия</th>
             </tr>
         </thead>
             <tbody>

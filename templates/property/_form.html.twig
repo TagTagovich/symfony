@@ -1,5 +1,20 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Сохранить') }}</button>
-    <a class="btn btn-default" href="{{ path('property_index') }}">Отмена</a>
-{{ form_end(form) }}
+            
+            
+                <div style="
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;                    
+                    border: 0px solid black;
+                    margin-top: 10px;
+                    padding: 0px;
+                ">   
+                    <div>
+                        {{ form_widget(form.submit) }}
+                    </div>
+                    <div style="margin-left: 10px;">
+                        <a href="{{ path('product_photo_index') }}">
+                        {{ form_widget(form.btn_cancel) }}
+                        </a>
+                    </div>
+                </div>
+            

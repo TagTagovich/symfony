@@ -25,7 +25,7 @@ class Property
     private $name;
 
     /**
-     * @ORM\Column(type="guid")
+     * @ORM\Column(type="string", length=10000)
      */
     private $propertyKey;
 

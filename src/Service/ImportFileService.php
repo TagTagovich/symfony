@@ -20,7 +20,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ImportFileService
 {
 	
-    private $em;
+	private $em;
     private $defaultPath;
     private $targetDirectory;
     private $slugger;
@@ -29,8 +29,8 @@ class ImportFileService
 
 	public function __construct(EntityManagerInterface $em, string $excelDirectory, $targetDirectory, SluggerInterface $slugger, Filesystem $filesystem) 
 	{
-        $this->em = $em;
-        $this->excelDirectory = $excelDirectory;
+		$this->em = $em;
+		$this->excelDirectory = $excelDirectory;
         $this->targetDirectory = $targetDirectory;
         $this->slugger = $slugger;
         $this->filesystem = $filesystem;
@@ -49,6 +49,7 @@ class ImportFileService
         }
 
         return $fileName;
+        
     }
 
     public function getTargetDirectory()
@@ -56,25 +57,36 @@ class ImportFileService
         return $this->targetDirectory;
     }
     
-    public function newExcelFile()
+    public function newExcelFile($excelFileName)
 	{
-		$arrayMethods = array(
+		
+        $arrayMethods = array(
 
             'setName',
             'setDescription',
-            'setPrice',
-            'setSlug',
-            'setType',
-            //'setIsActive',
-            'setBasePrice',
+		    'setPrice',
+		    'setSlug',
+		    'setType',
+		    //'setIsActive',
+		    'setBasePrice',
+            'setDiscPrice',
             'setAccessOddment',
+            'setComponentsComport',
+            'setConsumableWare',
+            'setWeight',
+            'setWidth',
+            'setHeight',
+            'setLength',
+
 
 		     
         );   
         $pathFile = $this->excelDirectory . '/'; 
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xls');
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
         $reader->setReadDataOnly(TRUE);
-        $spreadsheet = $reader->load($pathFile . 'price.xlsx');
+        $spreadsheet = $reader->load($pathFile . $excelFileName);
+        //$spreadsheet = $reader->load($pathFile . 'price.xlsx');
         //$spreadsheet = $reader->load($pathFile . 'price.xlsx');
         $worksheet = $spreadsheet->getActiveSheet();
         $product = new Product;
@@ -101,10 +113,13 @@ class ImportFileService
                     
                 }
             }
-      }
+        dump($pathFile);
+        dump($excelFileName);
+
+    }
                         
 
-    public function updateExcelFile()
+    public function updateExcelFile($excelFileName)
     {
         $arrayMethods = array(
             'setName',
@@ -114,13 +129,21 @@ class ImportFileService
             'setType',
             //'setIsActive',
             'setBasePrice',
+            'setDiscPrice',
             'setAccessOddment',
+            'setComponentsComport',
+            'setConsumableWare',
+            'setWeight',
+            'setWidth',
+            'setHeight',
+            'setLength',
 
         );  
         $pathFile = $this->excelDirectory . '/'; 
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xls');
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
         $reader->setReadDataOnly(TRUE);
-        $spreadsheet = $reader->load($pathFile . 'price.xlsx');            
+        $spreadsheet = $reader->load($pathFile . $excelFileName);           
         $worksheet = $spreadsheet->getActiveSheet();
         $c = count($arrayMethods) - 1;
         $i = -1;
@@ -155,7 +178,6 @@ class ImportFileService
                         }
                     //}
                 }                  
-            }
-                                  
+            }                      
     }           
 }              

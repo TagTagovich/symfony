@@ -1,40 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Создание товара{% endblock %}
+{% block title %}Новый товар{% endblock %}
 
 {% block body %}
+
+{{ include('product/_form.html.twig') }}
+
+
+
+
+
+
+{#{{ form_start(form) }}
+
+    <h3>Category</h3>
+    <ul class="category" data-index="{{ form.category|length > 0 ? form.category|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.category.vars.prototype)|e('html_attr') }}">
+        {% for cat in form.category %}
+            <li>{{ form_row(cat.name) }}</li>
+        {% endfor %}
+    </ul>
+    <button type="button" class="add_item_link" data-collection-holder-class="category">Add a tag</button>
     <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
-        <div><a href="{{ path('product_index') }}">Товары</a> / Создание товара</div>
+
     </h4>    
          <div class="card">
             <div class="card-body">
                 {{ include('product/_form.html.twig') }}
             </div>
-        </div>    
-{{ form_start(form) }} 
+        </div>  
+{{ form_end(form) }}#}
 
-{#<h3 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
-    <div>Новое фото</div>
-</h3>#}
 
-{#<ul class="images" data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}"
-    data-prototype="{{ form_widget(form.images.vars.prototype.image)|e('html_attr') }}">
-        
-    {% for image in form.images %}
-        <li>{{ form_row(image.image) }}</li>
-    {% endfor %}
-</ul>#}
-{#<button type="button" class="add_item_link" data-collection-holder-class="images">Add a photo</button>#}
+{# ------------ACTUAL------------------- 
+{{ form_start(form) }}
+------END ACTUAL----------- #}
+    
+    {#<ul class="product_photos" data-index="{{ form.product_photos|length > 0 ? form.product_photos|last.vars.image + 1 : 0 }}" data-prototype="{{ form_widget(form.product_photos.vars.prototype)|e('html_attr') }}">
+    {% for photik in form.product_photos %}
+    <li>
+    {{ form_row(photik.image) }}
+    </li>   
+    {% endfor %}    
+    </ul>#}
 
+    {# ------------ACTUAL------------------- 
+    <ul class="product_properties" data-index="{{ form.product_properties|length > 0 ? form.product_properties|last.vars.value + 1 : 0 }}" data-prototype="{{ form_widget(form.product_properties.vars.prototype)|e('html_attr') }}">
+    {% for propik in form.product_properties %}
+    <li>
+    {{ form_row(propik.value) }}
+    </li>   
+    {% endfor %}    
+    </ul>
+
+    ------END ACTUAL----------- #}
+
+{#{{ include('product/_prop_form.html.twig') }}#}
+    {#<button type="button" class="add_item_link" data-collection-holder-class="product_photos">Add a categoraa</button>#}
+             
+            {# -------- ACTUAL -----
+             <div class="card">
+            <div class="card-body">
+                {{ include('product/_form.html.twig') }}
+            </div>
+        </div>   
 {{ form_end(form) }}
+--------END ACTUAL ----#}
 
-{% endblock %}
 
 
-{% block javascripts %}
-{{ parent() }}
-{{ encore_entry_script_tags('con') }}
-{% endblock %}
+{#<script src="{{ asset('assets/vendor/js/add-collection-widget.js') }}"></script> #}
+ {#<script src="{{ asset('assets/vendor/js/remove-collection-photik.js') }}"></script>#}
+
+ {# ---- ACTUAL
+ <script src="{{ asset('assets/vendor/js/add-collection-photik.js') }}"></script>
+ }
+  -------END ACTUAL -----#}  
+
+{% endblock %} 
+
+
+
+
+
+
 
 
 

@@ -31,6 +31,21 @@ class CategoryController extends AbstractController
     public function new(Request $request): Response
     {
         $category = new Category();
+
+
+        /*$home = new Category();
+        $home->setTitle('Home');
+        $bikes = new Category();
+        $bikes->setTitle('Bikes');
+        $bikes->setParent($home);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($home);
+        $entityManager->persist($bikes);
+
+        $entityManager->flush();*/
+        
+
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 

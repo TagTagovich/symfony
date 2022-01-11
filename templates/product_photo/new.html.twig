@@ -4,12 +4,42 @@
 
 {% block body %}
     <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
-        <div><a href="{{ path('product_photo_index') }}">Фото</a> / Создание фото</div>
+        <div><a href="{{ path('product_photo_index') }}">Фото</a> / Создать фото</div>
     </h4>
 
     <div class="card">
         <div class="card-body">
-            {{ include('product_photo/_form.html.twig') }}
+            {{ form_start(form) }}
+                {{ form_row(form.updatedAt) }}
+                {{ form_row(form.image) }}
+                
+                <div style="
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;                    
+                    border: 0px solid black;
+                    margin-top: 10px;
+                    padding: 0px;
+                ">   
+                    <div>
+                        {{ form_widget(form.submit_product_photo) }}
+                    </div>
+                    <div style="margin-left: 10px;">
+                        <a href="{{ path('product_photo_index') }}">
+                        {{ form_widget(form.button_product_photo) }}
+                        </a>
+                    </div>
+                </div>
+            {{ form_end(form) }}    
         </div>
-    </div>
-{% endblock %}
+    </div>    
+{% endblock %}        
+        
+        
+        
+    
+
+        
+    
+
+

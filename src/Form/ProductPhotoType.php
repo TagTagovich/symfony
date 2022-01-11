@@ -8,6 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 class ProductPhotoType extends AbstractType
 {
@@ -17,6 +19,9 @@ class ProductPhotoType extends AbstractType
 
             ->add('updatedAt')
             ->add('image', VichImageType::class, ['label' => 'Файл изображения', 'required' => false])
+            ->add('submit_product_photo', SubmitType::class, ['label' => 'Сохранить'])
+            ->add('button_product_photo', ButtonType::class, ['label' => 'Отменить'])
+
           
         ;
     }

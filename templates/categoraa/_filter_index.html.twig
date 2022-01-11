@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Категории{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-body">
+        {{ include('categoraa/_filter_form.html.twig') }}
+    </div>
+</div>  
+<h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+    <div>Категории</div>
+    
+        {% if is_granted('ROLE_ADMIN') %}
+    <a class="btn btn-primary rounded-pill d-block" href="{{ path('categoraa_new') }}"><i class="fa fa-plus"></i> Создать категорию</a>
+        {% endif %}
+</h4>
+<ul class="nav nav-tabs mb-2">
+    <li class="nav-item"> <a class="nav-link active" href="{{ path('categoraa_index', {'id': categoraa.id}) }}" role="tab"><span class="hidden-xs-down">Рекламные материалы</span></a> </li>
+</ul>
+<div class="card">
+    <div class="card-datatable table-responsive">
+        <table class="table color-table muted-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Наименование</th>
+                    <th>Описание</th>
+                    <th>Slug</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for categoraa in categor %}
+                <tr>
+                    <td>{{ categoraa.id }}</td>
+                    <td>{{ categoraa.title }}</td>
+                    <td>
+                        <nobr>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('categoraa_edit', {'id': categoraa.id}) }}" class="btn btn-success" title="Редактировать"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="{{ path('categoraa_delete', {'id': categoraa.id}) }}" class="btn btn-danger" title="Удалить"><i class="far fa-trash-alt"></i></a>
+                            {% endif %}
+                        </nobr>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">пусто</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

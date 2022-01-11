@@ -1,17 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ImportFile{% endblock %}
+{% block title %}Импорт из Excel{% endblock %}
 
 {% block body %}
-    <h1>Create new ImportFile</h1>
+    <h1>Импорт из Excel</h1>
 
     {{ form_start(form) }}
     {# ... #}
 
-        {{ form_row(form.file) }}
-            {{ form_widget(form) }}
-            <button class="btn btn-success">{{ button_label|default('Импортировать новые товары') }}</button>
-            <button class="btn btn-success">{{ button_label|default('Обновить свойства товаров') }}</button>
     {{ form_end(form) }}
 {% endblock %}
     

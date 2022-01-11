@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ProductPhoto;
-use App\Form\ProductPhoto1Type;
+use App\Form\ProductPhotoType;
 use App\Repository\ProductPhotoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +22,7 @@ class ProductPhotoController extends AbstractController
      */
     public function index(ProductPhotoRepository $productPhotoRepository): Response
     {
+        //'product_photos'?
         return $this->render('product_photo/index.html.twig', [
             'product_photos' => $productPhotoRepository->findAll(),
         ]);
@@ -33,7 +34,7 @@ class ProductPhotoController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $productPhoto = new ProductPhoto();
-        $form = $this->createForm(ProductPhoto1Type::class, $productPhoto);
+        $form = $this->createForm(ProductPhotoType::class, $productPhoto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

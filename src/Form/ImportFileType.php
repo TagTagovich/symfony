@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
@@ -26,7 +27,7 @@ class ImportFileType extends AbstractType
             
             //->add('excel_filename', TextType::class, ['label' => 'Наименование файла', 'required' => false])
             ->add('file', FileType::class, [
-                'label' => 'File (.xls/.xlsx file)',
+                'label' => 'Файл - .xls/.xlsx',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -36,10 +37,12 @@ class ImportFileType extends AbstractType
                             'application/vnd.ms-excel',
                             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid .xls/.xlsx document',
+                        'mimeTypesMessage' => 'Пожалуйста, загрузите валидный .xls/.xlsx документ',
                     ])
                 ],
             ])
+            ->add('import_b', SubmitType::class, ['label' => 'Импортировать товары'])
+            ->add('update_b', SubmitType::class, ['label' => 'Обновить свойства товаров'])
             ;
 
     }

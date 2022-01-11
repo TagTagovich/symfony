@@ -5,8 +5,9 @@
 {% block body %}
 <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
     <div>Свойства</div>
-    
+        {% if is_granted('ROLE_ADMIN') %}
     <a class="btn btn-primary rounded-pill d-block" href="{{ path('property_new') }}"><i class="fa fa-plus"></i> Создать свойство</a>
+        {% endif %}
 </h4>
 <div class="card">
     <div class="card-datatable table-responsive">
@@ -17,7 +18,7 @@
                     <th>Название</th>
                     <th>Код</th>
                     <th>Тип</th>
-                    <th>actions</th>
+                    <th>Действия</th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,10 +31,16 @@
                     <td>{{ property.type }}</td>
                     <td>
                         <nobr>
+                                {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('property_edit', {'id': property.id}) }}" class="btn btn-success" title="Редактировать"><i class="fas fa-pencil-alt"></i></a>
                             <a href="{{ path('property_delete', {'id': property.id}) }}" class="btn btn-danger" title="Удалить"><i class="far fa-trash-alt"></i></a>
+                                {% endif %}
                         </nobr>
                     </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">пусто</td>
                 </tr>
             {% endfor %}
             </tbody>

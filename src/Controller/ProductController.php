@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\Property;
+use App\Entity\ProductProperty;
 use App\Entity\ProductPhoto;
+use App\Entity\Category;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +42,10 @@ class ProductController extends AbstractController
         //$newtag = $filesystem->appendToFile('logs.png', '');
         
         $product = new Product();
+        $product_prop = new ProductProperty();
+        $category = new Category();
+        $repo = $this->getDoctrine()->getRepository(Product::class);
+        /*$repoP = $repo = $this->getDoctrine()->getRepository(ProductProperty::class);*/
         /*if($productPh){
 	        $form->remove('productPhoto');
         	$product->setProductPhoto($productPh);
@@ -47,26 +54,76 @@ class ProductController extends AbstractController
         /*$image = new ProductPhoto();
         $image->setImage();
         $product->getImages()->add($image);*/
+        /*$cat1 = new Category();
+        $cat1->setName('cat1');
+        $product->getCategory()->add($cat1);
+        $cat2 = new Category();
+        $cat2->setName('cat2');
+        $product->getCategory()->add($cat2);
+        // end dummy code*/
 
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
+        $datas = $form->getData();
+        dump($datas);
+        dump($product_prop);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+           // ---------- change
+            $datas = $form->getData();
+            dump($datas);
+            //----------
             /*$entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();*/
-
+            //$product->setCreatedAt('now');
             $entityManager = $this->getDoctrine()->getManager();
+            
+            $property = $product->getProductProperties();
+            dump($property);
+            $entityManager->persist($property);
+            //$entityManager->persist($category);
+            /*$entityManager->persist($cat1);
+            $entityManager->persist($cat2);*/
+            //$entityManager->persist($category);  
+            //$iduha = $product->getId();
+            //dump($iduha);
+            /*$t = $product->getProductProperties()->add($product_prop);
+            $y = $product->getProductProperties();
+            $datas = $form->getData();
+            
+            dump($product_prop);
+            dump($t);
+            dump($datas);*/
+            //$entityManager->persist($product_prop);
+            //$product->addProductProperties();
+            //$product->addProductProperties($product_prop);
             $entityManager->persist($product);
+            
+            //$product->getProductProperties();
+            //
+            
+
+
+            //$property = $product->getProductProperties();
+            //$entityManager->persist($property);
+            //-----------------------------
+            //$entityManager->persist($product_p);
+           
+
+            //$iduha = $entityManager->getId();
+            //$repoP->setProduct($iduha);
+           // dump($iduha);
+            //$entityManager->persist($product_p);
             $entityManager->flush();
             
 
             
-            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+            
         }
 
         return $this->renderForm('product/new.html.twig', [
+            //'product_properties' => $product_prop,
             'product' => $product,
             'form' => $form,
         ]);

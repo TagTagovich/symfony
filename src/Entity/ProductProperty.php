@@ -42,6 +42,16 @@ class ProductProperty
         return $this->product;
     }
 
+    /* не давно добавлено */
+
+    public function addProduct(Product $product): void
+    {
+    // for a many-to-one association:
+    $product->setProduct($this);
+
+    $this->products->add($product);
+    }
+
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
@@ -72,4 +82,6 @@ class ProductProperty
 
         return $this;
     }
+
+
 }

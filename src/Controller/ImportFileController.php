@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 
 /**
@@ -25,31 +26,65 @@ class ImportFileController extends AbstractController
     /**
      * @Route("/new", name="import_file_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager, ImportFileService $importFileService): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ImportFileService $importFileService, Filesystem $filesystem): Response
     {
 
         $importFile = new ImportFile();
         $form = $this->createForm(ImportFileType::class, $importFile);
-        $form->handleRequest($request);
+        $r = $form->handleRequest($request);
+        dump($r);
+        dump($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $excelFile */
-            $excelFile = $form->get('file')->getData();
-            if ($excelFile) {
-            $excelFileName = $importFileService->upload($excelFile);
-            $importFile->setExcelFilename($excelFileName);
-            }
-             $task = $form->getData();
-            dump($task);
-            $entityManager->persist($importFile);
-            $entityManager->flush();
-            $importFileService->newExcelFile();
+            if($form->get('import_b')->isClicked()) {
+                /** @var UploadedFile $excelFile */
+                $excelFile = $form->get('file')->getData();
+                if ($excelFile) {
+                $excelFileName = $importFileService->upload($excelFile);
+                $importFile->setExcelFilename($excelFileName);
+                }
+                $task = $form->getData();
+                dump($task);
+                $entityManager->persist($importFile);
+                $entityManager->flush();
+            
+            $importFileService->newExcelFile($excelFileName);
+            
+            } elseif ($form->get('update_b')->isClicked()) {
+
+                /** @var UploadedFile $excelFile */
+                $excelFile = $form->get('file')->getData();
+                if ($excelFile) {
+                $excelFileName = $importFileService->upload($excelFile);
+                $importFile->setExcelFilename($excelFileName);
+                }
+                $task = $form->getData();
+                dump($task);
+                $entityManager->persist($importFile);
+                $entityManager->flush();
+                $importFileService->updateExcelFile($excelFileName);
+              
+              }
+            
+            $filesystem = new Filesystem();
+            $path=$this->getParameter('app.excel_directory').'/'.$excelFileName;
+            $filesystem->remove($path);
+            
+            /*if($form->get('import_b')->isClicked()) {
+            
+            $importFileService->newExcelFile($excelFileName);
+            
+            } elseif ($form->get('update_b')->isClicked()) {
+
+                $importFileService->updateExcelFile($excelFileName);
+              
+              }*/
+            
             //$importFileService->updateExcelFile();
 
                //return $this->redirectToRoute('import_file_index', [], Response::HTTP_SEE_OTHER);
         }
-            //$entityManager->remove($importFile);
-           // $entityManager->flush();
+
 
         return $this->renderForm('import_file/new.html.twig', [
             'import_file' => $importFile,

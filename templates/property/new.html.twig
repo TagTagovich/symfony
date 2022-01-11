@@ -1,15 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Создание свойства{% endblock %}
+{% block title %}Создание свойства товара{% endblock %}
 
 {% block body %}
     <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
-        <div><a href="{{ path('property_index') }}">Свойство</a> / Создание свойства</div>
+        <div><a href="{{ path('property_index') }}">Свойство</a> / Создание свойства товара</div>
     </h4>
-
+            
     <div class="card">
-        <div class="card-body">
-            {{ include('property/_form.html.twig') }}
+        <div class="card-body">    
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.property_key) }}
+            {{ form_row(form.type) }}
+            <div style="
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;                    
+                    border: 0px solid black;
+                    margin-top: 10px;
+                    padding: 0px;
+                ">   
+                    <div>
+                        {{ form_widget(form.submit) }}
+                    </div>
+                    <div style="margin-left: 10px;">
+                        <a href="{{ path('category_index') }}">
+                        {{ form_widget(form.btn_cancel) }}
+                        </a>
+                    </div>
+                </div>
+        {{ form_end(form) }}
         </div>
-    </div>
+    </div>        
 {% endblock %}
